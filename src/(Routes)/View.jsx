@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   FaCalendarAlt,
+  FaCopy,
   FaExternalLinkAlt,
   FaEye,
   FaFilePdf,
@@ -12,8 +13,11 @@ import { RiSearch2Fill } from "react-icons/ri";
 import useStore from "../lib/ZustStore";
 import { useParams } from "react-router-dom";
 import { GrLike, GrDislike } from "react-icons/gr";
-import html2canvas from 'html2canvas';
+import html2canvas from "html2canvas";
 import { BiSolidFileImage } from "react-icons/bi";
+import DevDropDown from "../components/Common/DevDropDown";
+import ShareLink from "../components/SideBar/SidebarComponents/ShareLink";
+import { toast } from "sonner";
 
 const View = () => {
   const {
@@ -36,10 +40,10 @@ const View = () => {
     const getdoPasteVerify = localStorage.getItem("dopasteEdit");
     if (getdoPasteVerify) {
       const res = JSON.parse(getdoPasteVerify).filter(
-        (item) => item ===  pageInfo.$id
+        (item) => item === pageInfo.$id
       );
       if (res.length > 0) {
-        console.log('first',res)
+        console.log("first", res);
         setEditStatus(true);
       }
     }
@@ -62,40 +66,44 @@ const View = () => {
   }, [likes, dislikes]);
 
   const saveAsImage = () => {
-    const input = document.getElementById('pageContent');
-  
-    html2canvas(input, { 
-      logging: false, 
+    const input = document.getElementById("pageContent");
+
+    html2canvas(input, {
+      logging: false,
       useCORS: true,
       allowTaint: true,
-      backgroundColor: null // or 'transparent'
-    })
-      .then((canvas) => {
-        const imgData = canvas.toDataURL('image/jpeg', 1.0); // Quality set to 1.0 for maximum quality
-        const link = document.createElement('a');
-        link.href = imgData;
-        link.download = 'pageContent.jpeg';
-        link.click();
-      });
+      backgroundColor: null, // or 'transparent'
+    }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/jpeg", 1.0); // Quality set to 1.0 for maximum quality
+      const link = document.createElement("a");
+      link.href = imgData;
+      link.download = "pageContent.jpeg";
+      link.click();
+    });
   };
-  
+  const handleCopy = () => {
+    navigator.clipboard.writeText(
+      `${process.env.VITE_APP_VIEW}${pageInfo.link}`
+    );
+    toast("Link Copied");
+  };
 
   return (
     pageInfo &&
     pageInfo.title && (
-      <main className="h-screen w-full max-w-6xl mx-auto bg-primary p-1 px-5 pb-0 flex gap-3 pr-0 shadow-lg">
-        <section className="h-full w-[70%] bg-primary flex flex-col gap-2">
+      <main className="h-screen w-full max-w-6xl mx-auto bg-primary p-1 md:px-5 pb-0 flex gap-3 pr-0 shadow-lg md:flex-row flex-col">
+        <section className="h-fit md:h-full md:w-[70%] bg-primary flex flex-col gap-2">
           <h1 className="text-center text-3xl font-semibold">
             {pageInfo.title}
           </h1>
           <div
             id="pageContent"
-            className="w-full flex-1 p-2 rounded-t-xl border border-accent bg-white overflow-y-scroll"
+            className="w-full min-h-[100px]  md:flex-1 p-2 rounded-xl md:rounded-t-xl border border-accent bg-white overflow-y-scroll"
             dangerouslySetInnerHTML={{ __html: pageInfo.content }}
           />
         </section>
         <section className="h-full space-y-4 flex-1 relative">
-          <span className=" text-2xl flex justify-end w-full p-2 pr-7 items-center gap-3 ">
+          <span className=" text-2xl flex justify-end w-full p-2 md:pr-7 items-center gap-3 ">
             {editStatus && (
               <a
                 href={`${process.env.VITE_APP_VIEW}edit?=${pageInfo.$id}`}
@@ -106,9 +114,24 @@ const View = () => {
                 </button>
               </a>
             )}
-            <IoMdShare className="hover:cursor-pointer hover:text-accent" />
+            <DevDropDown
+              togButton={
+                <IoMdShare className="hover:cursor-pointer hover:text-accent" />
+              }
+            >
+              <div className="bg-primary rounded-xl p-1 border border-accent">
+                <span className="text-sm text-secondary flex items-center gap-1 py-1 justify-center">
+                  {process.env.VITE_APP_VIEW}${pageInfo.link}
+                  <FaCopy
+                    onClick={handleCopy}
+                    className="text-xl cursor-pointer hover:text-accent"
+                  />
+                </span>
+                <ShareLink />
+              </div>
+            </DevDropDown>
           </span>
-          <div className="w-full rounded-l-full bg-white p-3 flex items-center gap-2 border border-r-0 border-accent">
+          {/* <div className="w-full rounded-l-full bg-white p-3 flex items-center gap-2 border border-r-0 border-accent">
             <RiSearch2Fill className="text-2xl" />
             <input
               type="text"
@@ -116,12 +139,12 @@ const View = () => {
               placeholder="search"
               className="outline-none"
             />
-          </div>
-          <div className="w-full rounded-l-full bg-white p-3 flex items-center gap-2 border border-r-0 border-accent">
+          </div> */}
+          <div className="w-full rounded-full bg-white p-3 flex items-center gap-2 border border-accent">
             <HiMiniUserCircle className="text-2xl" />
             <span>{pageInfo.author}</span>
           </div>
-          <div className="w-full rounded-l-full bg-white p-3 flex items-center gap-2 border border-r-0 border-accent">
+          <div className="w-full rounded-full bg-white p-3 flex items-center gap-2 border border-accent">
             <FaCalendarAlt className="text-2xl" />
             <span>
               {(() => {
@@ -134,7 +157,7 @@ const View = () => {
             </span>
           </div>
           {pageInfo.keywords.length > 0 && (
-            <div className="w-full flex-col rounded-l-xl bg-white p-3 gap-4 border border-r-0 border-accent">
+            <div className="w-full flex-col rounded-xl bg-white p-3 gap-4 border border-accent">
               <span className="flex items-center gap-2">
                 <IoKey className="text-2xl" />
                 <p>Keywords</p>
@@ -151,8 +174,8 @@ const View = () => {
               </div>
             </div>
           )}
-          <div className="w-full rounded-l-full divide-x-2 divide-accent bg-white p-1 grid grid-cols-2 gap-2 border border-r-0 border-accent">
-            <div className="w-full flex  gap-4 rounded-full justify-around p-2 px-3 border border-accent">
+          <div className="w-full rounded-full divide-x-2 divide-accent bg-white p-1 grid grid-cols-2 gap-2 border  border-accent">
+            <div className="w-full flex divide-x-2  gap-4 rounded-full justify-around p-2 px-3 border border-accent">
               <div className="flex items-center gap-2">
                 <GrLike
                   onClick={() => {
@@ -163,7 +186,7 @@ const View = () => {
                 />
                 <span className="text-xl">{pageInfo.likes}</span>
               </div>
-              <div className="flex items-center  gap-2">
+              <div className="flex items-center  gap-2 pl-2">
                 <GrDislike
                   onClick={() => {
                     setLikes(false);
@@ -179,11 +202,13 @@ const View = () => {
               <p className="font-semibold">{pageInfo.viewCount}</p>
             </div>
           </div>
-          <button  onClick={saveAsImage} className="flex shadow-md items-center gap-2 active:border-secondary hover:bg-accent font-semibold w-1/2  bg-white p-2 px-4 rounded-full border border-accent">
+          <button
+            onClick={saveAsImage}
+            className="flex shadow-md items-center gap-2 active:border-secondary hover:bg-accent font-semibold w-1/2  bg-white p-2 px-4 rounded-full border border-accent mx-auto md:mx-0"
+          >
             <BiSolidFileImage className="text-2xl" />
             Save as IMG
-
-               {/* do not remove this update in the future */}
+            {/* do not remove this update in the future */}
             {/* {pageInfo && pageInfo.title && <PDFGenerator pageInfo={pageInfo} />} */}
           </button>
           <a
