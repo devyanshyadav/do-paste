@@ -39,8 +39,8 @@ const EditorHead = () => {
   //   setLocalValue(pageInfo.editLink);
   // }, [pageInfo]);
   return (
-    <header className="w-full rounded-xl bg-primary p-4 grid place-content-center grid-cols-3 gap-4">
-      <span className="place-self-start p-1 px-2 rounded-full bg-white border border-secondary flex gap-1 overflow-hidden items-center">
+    <header className="w-full rounded-xl bg-primary md:p-4 p-2 grid place-content-center grid-cols-3 gap-1 md:gap-4 border border-accent">
+      <span className="md:place-self-start p-1 px-2 rounded-full bg-white border border-secondary flex md:gap-1 overflow-hidden items-center">
         <HiMiniUser className="text-2xl" />
         <input
           type="text"
@@ -50,7 +50,7 @@ const EditorHead = () => {
           className="outline-none bg-transparent w-fit"
         />
       </span>
-      <span className=" place-self-center p-1 px-2 rounded-full bg-white border border-secondary flex gap-1 overflow-hidden items-center">
+      <span className=" md:place-self-center p-1 px-2 rounded-full w-full bg-white border border-secondary flex gap-1 overflow-hidden items-center">
         <input
           type="text"
           name="title"

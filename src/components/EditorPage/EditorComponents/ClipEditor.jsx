@@ -207,7 +207,7 @@ const ClipEditor = () => {
   }, []);
   return (
     <div
-      className="w-full  rounded-xl flex gap-1"
+      className="w-full  rounded-xl flex gap-1 flex-wrap"
       // style={{ display: "none" }}
     >
       <button onClick={makeBold} className={clipClass}>

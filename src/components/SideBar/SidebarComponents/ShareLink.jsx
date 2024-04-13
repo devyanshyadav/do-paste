@@ -20,7 +20,7 @@ import {
   MailruIcon,
 } from "react-share";
 
-function ShareLink({ linkValue }) {
+function ShareLink() {
   const { pageInfo, setPageInfo } = useStore((state) => state);
   const [shareData, setShareData] = React.useState(`${process.env.VITE_APP_VIEW}${pageInfo.link}`); // Set your share data here
   useEffect(() => {
