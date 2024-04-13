@@ -65,28 +65,41 @@ const View = () => {
     }
   }, [likes, dislikes]);
 
-  const saveAsImage = () => {
-    const input = document.getElementById("pageContent");
+  // const saveAsImage = () => {
+  //   const input = document.getElementById("pageContent");
 
-    html2canvas(input, {
-      logging: false,
-      useCORS: true,
-      allowTaint: true,
-      backgroundColor: null, // or 'transparent'
-    }).then((canvas) => {
-      const imgData = canvas.toDataURL("image/jpeg", 1.0); // Quality set to 1.0 for maximum quality
-      const link = document.createElement("a");
-      link.href = imgData;
-      link.download = "pageContent.jpeg";
-      link.click();
-    });
-  };
+  //   html2canvas(input, {
+  //     logging: false,
+  //     useCORS: true,
+  //     allowTaint: true,
+  //     backgroundColor: null, // or 'transparent'
+  //   }).then((canvas) => {
+  //     const imgData = canvas.toDataURL("image/jpeg", 1.0); // Quality set to 1.0 for maximum quality
+  //     const link = document.createElement("a");
+  //     link.href = imgData;
+  //     link.download = "pageContent.jpeg";
+  //     link.click();
+  //   });
+  // };
+
   const handleCopy = () => {
     navigator.clipboard.writeText(
       `${process.env.VITE_APP_VIEW}${pageInfo.link}`
     );
     toast("Link Copied");
   };
+
+  const generatePDF = () => {
+    const elementToPrint = document.getElementById('pageContent');
+    if (!elementToPrint) {
+      console.error('Element not found!');
+      return;
+    }
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(elementToPrint.innerHTML);
+    printWindow.document.close();
+    printWindow.print();
+  }
 
   return (
     pageInfo &&
@@ -203,11 +216,11 @@ const View = () => {
             </div>
           </div>
           <button
-            onClick={saveAsImage}
+            onClick={generatePDF}
             className="flex shadow-md items-center gap-2 active:border-secondary hover:bg-accent font-semibold w-1/2  bg-white p-2 px-4 rounded-full border border-accent mx-auto md:mx-0"
           >
             <BiSolidFileImage className="text-2xl" />
-            Save as IMG
+            Save as PDF
             {/* do not remove this update in the future */}
             {/* {pageInfo && pageInfo.title && <PDFGenerator pageInfo={pageInfo} />} */}
           </button>
