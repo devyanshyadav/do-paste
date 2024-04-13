@@ -65,22 +65,6 @@ const View = () => {
     }
   }, [likes, dislikes]);
 
-  // const saveAsImage = () => {
-  //   const input = document.getElementById("pageContent");
-
-  //   html2canvas(input, {
-  //     logging: false,
-  //     useCORS: true,
-  //     allowTaint: true,
-  //     backgroundColor: null, // or 'transparent'
-  //   }).then((canvas) => {
-  //     const imgData = canvas.toDataURL("image/jpeg", 1.0); // Quality set to 1.0 for maximum quality
-  //     const link = document.createElement("a");
-  //     link.href = imgData;
-  //     link.download = "pageContent.jpeg";
-  //     link.click();
-  //   });
-  // };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(
