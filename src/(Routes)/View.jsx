@@ -36,9 +36,10 @@ const View = () => {
     const getdoPasteVerify = localStorage.getItem("dopasteEdit");
     if (getdoPasteVerify) {
       const res = JSON.parse(getdoPasteVerify).filter(
-        (item) => item === pageInfo && pageInfo.$id
+        (item) => item ===  pageInfo.$id
       );
       if (res.length > 0) {
+        console.log('first',res)
         setEditStatus(true);
       }
     }
@@ -82,7 +83,7 @@ const View = () => {
   return (
     pageInfo &&
     pageInfo.title && (
-      <main className="h-screen w-full max-w-6xl mx-auto bg-primary p-1 px-5 pb-0 flex gap-3 pr-0">
+      <main className="h-screen w-full max-w-6xl mx-auto bg-primary p-1 px-5 pb-0 flex gap-3 pr-0 shadow-lg">
         <section className="h-full w-[70%] bg-primary flex flex-col gap-2">
           <h1 className="text-center text-3xl font-semibold">
             {pageInfo.title}
@@ -190,7 +191,7 @@ const View = () => {
             target="_blank"
             className="absolute bottom-5 hover:underline left-2 flex items-center gap-2"
           >
-            Published By Quill
+            Published By do-paste
             <FaExternalLinkAlt className="text-xl" />
           </a>
         </section>
