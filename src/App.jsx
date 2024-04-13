@@ -9,10 +9,10 @@ import { useEffect } from 'react'
 import useStore from './lib/ZustStore'
 
 const App = () => {
- const { pageInfo, setPageInfo,deleteDocument } = useStore((state) => state);
-// useEffect(() => {
-//   deleteDocument();
-// },[])
+ const { deleteDocument } = useStore((state) => state);
+useEffect(() => {
+  deleteDocument();
+},[])
  
   return (
     <>
