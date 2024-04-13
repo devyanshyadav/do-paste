@@ -43,7 +43,6 @@ function CopySideBar() {
 
   const downloadQR = () => {
     const qrCode = document.getElementById("qr-code");
-    console.log(qrCode);
     if (!qrCode) {
       console.error("QR code element not found.");
       return;
@@ -61,6 +60,23 @@ function CopySideBar() {
       document.body.removeChild(downloadLink);
     });
   };
+
+  const handleExpiryDurationChange = (e) => {
+    const selectedWeeks = parseInt(e.target.value);
+    let expiryDate;
+  
+    if (selectedWeeks === 0) {
+      expiryDate = ""; // this when never is selected
+    } else {
+      let currentDate = new Date();
+      
+      let filterDate = new Date(currentDate.setDate(currentDate.getDate() + selectedWeeks * 7));
+      expiryDate = filterDate.toISOString().slice(0, 10);
+    }
+    console.log(expiryDate);
+    setPageInfo("expiry", expiryDate);
+  };
+  
 
   return (
     <SideBarWrapper
@@ -149,7 +165,7 @@ function CopySideBar() {
                 name="duration"
                 className=" bg-secondary px-10 flex justify-between py-1 text-primary outline-none rounded-md"
                 id="dur"
-                onChange={(e) => setPageInfo("expiry", e.target.value)}
+                onChange={handleExpiryDurationChange}
               >
                 {[0, 1, 2, 3, 4, 5].map((item, i) => (
                   <option

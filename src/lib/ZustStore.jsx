@@ -87,6 +87,7 @@ const useStore = create((set, get) => ({
     }
   },
 
+  // This is the function to generate random url
   generateRandomUrl: () => {
     const { setPageInfo, pageInfo, setPageInfoToDB, setPublishStatus } = get();
     if (!pageInfo.link) {
@@ -96,7 +97,8 @@ const useStore = create((set, get) => ({
     setPublishStatus(true);
     // setPageInfoToDB();
   },
-
+  
+  // This is the function to set pageInfoToDB
   setPageInfoToDB: async (setLocalValue) => {
     const {
       title,
@@ -162,11 +164,12 @@ const useStore = create((set, get) => ({
     }
   },
 
+  // This is the function to delete expired documents from the document
   deleteDocument: async () => {
     const { databaseId, collectionId } = get().initialState;
     try {
       const currentDate = new Date();
-      const formattedCurrentDate = currentDate.toISOString();
+      const formattedCurrentDate = currentDate.toISOString().slice(0, 10);
       console.log("Current Date:", formattedCurrentDate);
 
       const res = await databases.listDocuments(databaseId, collectionId, [

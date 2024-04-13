@@ -5,7 +5,6 @@ import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import View from "./(Routes)/View.jsx";
 import { Toaster } from 'sonner'
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Routes>
