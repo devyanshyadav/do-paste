@@ -70,7 +70,7 @@ function CopySideBar() {
     >
       <span
         onClick={() => setPublishStatus(false)}
-        className="absolute z-10 top-3 right-0 bg-primary p-1  border-secondary border  rounded-full rounded-br-full cursor-pointer "
+        className="absolute z-10 top-3  bg-primary right-1 hover:opacity-70  border-secondary border  rounded-full rounded-br-full cursor-pointer "
       >
         <RiCloseFill className="text-2xl text-secondary" />
       </span>

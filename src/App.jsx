@@ -21,7 +21,6 @@ const App = () => {
     <EditorBase/>
     <CopySideBar/>
     {/* <DashboardSideBar/> */}
-   
   
     </>
   )

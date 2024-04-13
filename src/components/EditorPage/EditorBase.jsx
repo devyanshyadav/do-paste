@@ -13,6 +13,8 @@ const EditorBase = () => {
      {
        keyWordStatus ? <EditorFoot setKeyWordStatus={setKeyWordStatus}/> : <button className='text-sm self-start font-semibold hover:underline' onClick={()=>setKeyWordStatus(true)}>Add Keywords</button>
      }
+      <span className='text-sm font-semibold select-none mx-auto opacity-70 fixed left-1/2 bottom-2 transform -translate-x-1/2 '>Developed by Aasu and Devyansh</span>
+
     </main>
   )
 }
