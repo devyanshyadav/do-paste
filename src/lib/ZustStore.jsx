@@ -22,7 +22,13 @@ const useStore = create((set, get) => ({
     link: "",
     userLink: null,
     visibility: true,
-    expiry: "20-12-2022",
+    // Expiry date set to one year from the current date by default
+    expiry: (() => {
+      let currentDate = new Date();
+      let oneYearLater = new Date(currentDate);
+      oneYearLater.setFullYear(currentDate.getFullYear() + 1);
+      return oneYearLater.toISOString().slice(0, 10);
+    })(),
     onceRead: false,
     viewCount: 0,
     likes: 0,
@@ -169,7 +175,7 @@ const useStore = create((set, get) => ({
     const { databaseId, collectionId } = get().initialState;
     try {
       const currentDate = new Date();
-      const formattedCurrentDate = currentDate.toISOString().slice(0, 10);
+      const formattedCurrentDate = currentDate.toISOString();
       console.log("Current Date:", formattedCurrentDate);
 
       const res = await databases.listDocuments(databaseId, collectionId, [
@@ -272,6 +278,7 @@ const useStore = create((set, get) => ({
       console.log(error);
     }
   },
+
   deletePage: async (id) => {
     const { databaseId, collectionId } = get().initialState;
     try {
@@ -315,6 +322,7 @@ const useStore = create((set, get) => ({
       return toast.error("Maximum Page Limit reached");
     }
   },
+
   totalDislikes: async () => {
     const { databaseId, collectionId } = get().initialState;
     const { pageInfo, user } = get();
@@ -339,6 +347,7 @@ const useStore = create((set, get) => ({
       console.log(error);
     }
   },
+
 }));
 
 export default useStore;

@@ -37,7 +37,10 @@ function CopySideBar() {
 
   const PublishPage = () => {
     if (pageInfo.link) {
+    
+
       setPageInfoToDB(setLocalValue);
+
     }
   };
 
@@ -64,18 +67,20 @@ function CopySideBar() {
   const handleExpiryDurationChange = (e) => {
     const selectedWeeks = parseInt(e.target.value);
     let expiryDate;
-  
+    let currentDate = new Date();
+
     if (selectedWeeks === 0) {
-      expiryDate = ""; // this when never is selected
+        let oneYearLater = new Date(currentDate);
+        oneYearLater.setFullYear(currentDate.getFullYear() + 1);
+        expiryDate = oneYearLater.toISOString().slice(0, 10);
+        
     } else {
-      let currentDate = new Date();
-      
-      let filterDate = new Date(currentDate.setDate(currentDate.getDate() + selectedWeeks * 7));
-      expiryDate = filterDate.toISOString().slice(0, 10);
+        let filterDate = new Date(currentDate.setDate(currentDate.getDate() + selectedWeeks * 7));
+        expiryDate = filterDate.toISOString().slice(0, 10);
     }
-    console.log(expiryDate);
     setPageInfo("expiry", expiryDate);
-  };
+};
+
   
 
   return (
