@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useLocalStorage } from "react-use";
 import { FaDownload } from "react-icons/fa";
 import html2canvas from "html2canvas";
+import { BsBoxArrowInUpRight } from "react-icons/bs";
 
 function CopySideBar() {
   const {
@@ -40,8 +41,6 @@ function CopySideBar() {
     }
   };
 
-
-  
   const downloadQR = () => {
     const qrCode = document.getElementById("qr-code");
     console.log(qrCode);
@@ -103,7 +102,10 @@ function CopySideBar() {
         <div className="border relative border-solid border-accent rounded-md px-2 py-2 transition-all">
           <QrCode linkValue={copyValue} />
           <div className="absolute inset-0 bg-primary/80 grid place-content-center opacity-0 hover:opacity-100">
-            <FaDownload onClick={downloadQR} className="text-5xl text-slate-900 hover:text-secondary cursor-pointer" />
+            <FaDownload
+              onClick={downloadQR}
+              className="text-5xl text-slate-900 hover:text-secondary cursor-pointer"
+            />
           </div>
         </div>
       </div>
@@ -194,6 +196,17 @@ function CopySideBar() {
         >
           Publish Now
         </button>
+      )}
+
+      {editLink && (
+        <a
+          href={`${process.env.VITE_APP_VIEW}${pageInfo.link}`}
+          target="_blank"
+          className="font-semibold hover:underline flex gap-1 items-center"
+        >
+          Visit Page
+          <BsBoxArrowInUpRight />
+        </a>
       )}
       {/* <hr className="border-[1.2px] border-solid border-accent w-full" /> */}
     </SideBarWrapper>

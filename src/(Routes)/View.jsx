@@ -13,6 +13,7 @@ import useStore from "../lib/ZustStore";
 import { useParams } from "react-router-dom";
 import { GrLike, GrDislike } from "react-icons/gr";
 import html2canvas from 'html2canvas';
+import { BiSolidFileImage } from "react-icons/bi";
 
 const View = () => {
   const {
@@ -178,7 +179,7 @@ const View = () => {
             </div>
           </div>
           <button  onClick={saveAsImage} className="flex shadow-md items-center gap-2 active:border-secondary hover:bg-accent font-semibold w-1/2  bg-white p-2 px-4 rounded-full border border-accent">
-            <FaFilePdf className="text-2xl" />
+            <BiSolidFileImage className="text-2xl" />
             Save as IMG
 
                {/* do not remove this update in the future */}
