@@ -12,6 +12,7 @@ import { RiSearch2Fill } from "react-icons/ri";
 import useStore from "../lib/ZustStore";
 import { useParams } from "react-router-dom";
 import { GrLike, GrDislike } from "react-icons/gr";
+import html2canvas from 'html2canvas';
 
 const View = () => {
   const {
@@ -58,6 +59,25 @@ const View = () => {
     }
   }, [likes, dislikes]);
 
+  const saveAsImage = () => {
+    const input = document.getElementById('pageContent');
+  
+    html2canvas(input, { 
+      logging: false, 
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: null // or 'transparent'
+    })
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/jpeg', 1.0); // Quality set to 1.0 for maximum quality
+        const link = document.createElement('a');
+        link.href = imgData;
+        link.download = 'pageContent.jpeg';
+        link.click();
+      });
+  };
+  
+
   return (
     pageInfo &&
     pageInfo.title && (
@@ -67,6 +87,7 @@ const View = () => {
             {pageInfo.title}
           </h1>
           <div
+            id="pageContent"
             className="w-full flex-1 p-2 rounded-t-xl border border-accent bg-white overflow-y-scroll"
             dangerouslySetInnerHTML={{ __html: pageInfo.content }}
           />
@@ -156,9 +177,12 @@ const View = () => {
               <p className="font-semibold">{pageInfo.viewCount}</p>
             </div>
           </div>
-          <button className="flex shadow-md items-center gap-2 active:border-secondary hover:bg-accent font-semibold w-1/2  bg-white p-2 px-4 rounded-full border border-accent">
+          <button  onClick={saveAsImage} className="flex shadow-md items-center gap-2 active:border-secondary hover:bg-accent font-semibold w-1/2  bg-white p-2 px-4 rounded-full border border-accent">
             <FaFilePdf className="text-2xl" />
-            Save as PDF
+            Save as IMG
+
+               {/* do not remove this update in the future */}
+            {/* {pageInfo && pageInfo.title && <PDFGenerator pageInfo={pageInfo} />} */}
           </button>
           <a
             href="/"
