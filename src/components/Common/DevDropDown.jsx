@@ -71,7 +71,7 @@ const DevDropDown = ({ togButton = "", children = "", setExternal=()=>{} }) => {
               top: `${dropPosition.top}px`,
               left: `${dropPosition.left}px`,
             }}
-            className="fixed"
+            className="fixed z-50"
           >
             {children}
           </div>,
