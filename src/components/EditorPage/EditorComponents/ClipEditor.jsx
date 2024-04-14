@@ -20,7 +20,6 @@ import ClipFontSize from "./ClipFontSize";
 import ClipEmoji from "./ClipEmoji";
 import ClipTxtHighLight from "./ClipTxtHighLight";
 import ClipFontFamily from "./ClipFontFamily";
-import { GoListOrdered } from "react-icons/go";
 import { IoImageOutline } from "react-icons/io5";
 
 const ClipEditor = () => {
@@ -46,11 +45,13 @@ const ClipEditor = () => {
 
   const changeTxtToCode = () => {
     document.execCommand("styleWithCSS", false, null);
-    document.execCommand(
-      "insertHTML",
-      false,
-      `<code style="background-color:#E5E5E5;border-radius:4px; padding:1px 4px">${selectedTxtNode}</code>`
-    );
+    if (selectedTxtNode) {
+      document.execCommand(
+        "insertHTML",
+        false,
+        `<code style="background-color:#E5E5E5;border-radius:4px; padding:1px 4px">${selectedTxtNode}</code>`
+      );
+    }
   };
 
   const insertImage = () => {
@@ -165,23 +166,23 @@ const ClipEditor = () => {
   useEffect(() => {
     const handleMouseUp = () => {
       const selection = window.getSelection();
-      const toolbar = document.querySelector(".editor-toolbar");
+      // const toolbar = document.querySelector(".editor-toolbar");
 
       if (selection.toString().length > 0) {
         const range = selection.getRangeAt(0);
         const selectedText = range.toString();
         setSelectedTxtNode(selectedText);
-        const editableElement = findClosestEditableElement(
-          range.commonAncestorContainer
-        );
+        // const editableElement = findClosestEditableElement(
+        //   range.commonAncestorContainer
+        // );
 
-        if (selectedText && editableElement) {
-          const rect = range.getBoundingClientRect();
-          toolbar.style.display = "flex";
-          toolbar.style.transform = "scale(1)";
-          toolbar.style.top = `${rect.bottom}px`;
-          toolbar.style.left = `${rect.left}px`;
-        }
+        // if (selectedText && editableElement) {
+        //   const rect = range.getBoundingClientRect();
+        //   toolbar.style.display = "flex";
+        //   toolbar.style.transform = "scale(1)";
+        //   toolbar.style.top = `${rect.bottom}px`;
+        //   toolbar.style.left = `${rect.left}px`;
+        // }
       }
     };
 

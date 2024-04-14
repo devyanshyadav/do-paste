@@ -94,16 +94,35 @@ const useStore = create((set, get) => ({
   },
 
   // This is the function to generate random url
-  generateRandomUrl: () => {
-    const { setPageInfo, pageInfo, setPageInfoToDB, setPublishStatus } = get();
+  generateRandomUrl: async () => {
+    const { setPageInfo, pageInfo, setPageInfoToDB, setPublishStatus, getSameLink } = get();
+  
     if (!pageInfo.link) {
-      const linkGen = Math.random().toString(36).substring(2, 7);
+      let linkGen = Math.random().toString(36).substring(2, 7);
+      while (await getSameLink(linkGen)) {
+        linkGen = Math.random().toString(36).substring(2, 7);
+      }
       setPageInfo("link", linkGen);
     }
+  
     setPublishStatus(true);
-    // setPageInfoToDB();
   },
   
+  getSameLink: async (link) => {
+    const { collectionId, databaseId } = get().initialState;
+
+    try {
+      const res = await databases.getDocuments(databaseId, collectionId, [
+        Query.equal("link", link),
+      ]);
+      return res.documents.length > 0;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+  
+
   // This is the function to set pageInfoToDB
   setPageInfoToDB: async (setLocalValue) => {
     const {
@@ -347,7 +366,6 @@ const useStore = create((set, get) => ({
       console.log(error);
     }
   },
-
 }));
 
 export default useStore;

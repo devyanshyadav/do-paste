@@ -36,15 +36,13 @@ function CopySideBar() {
 
   const PublishPage = () => {
     if (pageInfo.link) {
-    
-
       setPageInfoToDB(setLocalValue);
-
     }
   };
 
   const downloadQR = () => {
-    const qrCodeURL = document.getElementById('qrCodeEl')
+    const qrCodeURL = document
+      .getElementById("qrCodeEl")
       .toDataURL("image/png")
       .replace("image/png", "image/octet-stream");
     let aEl = document.createElement("a");
@@ -61,33 +59,32 @@ function CopySideBar() {
     let currentDate = new Date();
 
     if (selectedWeeks === 0) {
-        let oneYearLater = new Date(currentDate);
-        oneYearLater.setFullYear(currentDate.getFullYear() + 1);
-        expiryDate = oneYearLater.toISOString().slice(0, 10);
-        
+      let oneYearLater = new Date(currentDate);
+      oneYearLater.setFullYear(currentDate.getFullYear() + 1);
+      expiryDate = oneYearLater.toISOString().slice(0, 10);
     } else {
-        let filterDate = new Date(currentDate.setDate(currentDate.getDate() + selectedWeeks * 7));
-        expiryDate = filterDate.toISOString().slice(0, 10);
+      let filterDate = new Date(
+        currentDate.setDate(currentDate.getDate() + selectedWeeks * 7)
+      );
+      expiryDate = filterDate.toISOString().slice(0, 10);
     }
     setPageInfo("expiry", expiryDate);
-};
-
-  
+  };
 
   return (
     <SideBarWrapper
       className={`${
         publishStatus ? "translate-x-0" : "translate-x-full"
-      } right-0 transition-all `}
+      } right-0 transition-all z-50 `}
     >
       <span
         onClick={() => setPublishStatus(false)}
-        className="absolute z-10 top-3  bg-primary right-1 hover:opacity-70  border-secondary border  rounded-full rounded-br-full cursor-pointer "
+        className="absolute z-10 md:top-3 top-8  bg-primary right-1 hover:opacity-70  border-secondary border  rounded-full rounded-br-full cursor-pointer "
       >
         <RiCloseFill className="text-2xl text-secondary" />
       </span>
 
-      <div className="w-full mt-8 relative h-fit px-2  py-2 rounded-full border text-sm border-secondary   bg-white">
+      <div className="w-full mt-16 md:mt-8 relative h-fit px-2  py-2 rounded-full border text-sm border-secondary   bg-white">
         <input
           type="text"
           className="w-full  rounded-full outline-none pl-2  pr-10"

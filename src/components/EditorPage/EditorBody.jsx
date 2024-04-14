@@ -4,7 +4,7 @@ import ClipEditor from "./EditorComponents/ClipEditor";
 
 const EditorBody = () => {
   return (
-    <section className="h-[85%] md:h-[78%] bg-primary rounded-xl p-3 shadow-md flex flex-col gap-1 border border-accent ">
+    <section className=" z-10 h-[85%] md:h-[78%] bg-primary rounded-xl p-3 shadow-md flex flex-col gap-1 border border-accent ">
       <ClipEditor />
 
       <EditorTextArea />

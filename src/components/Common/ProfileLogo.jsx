@@ -29,7 +29,7 @@ function ProfileLogo() {
   return (
     <div
     onClick={() => setDropdown(!dropdown)}
-      className={` cursor-pointer border-solid ${
+      className={` cursor-pointer border-solid hover:shadow-md ${
         initialState.userStatus
           ? "bg-primary p-2 "
           : " px-2 py-1 bg-white"
