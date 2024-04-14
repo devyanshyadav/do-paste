@@ -204,7 +204,7 @@ const View = () => {
             onClick={generatePDF}
             className="flex shadow-md items-center gap-2 active:border-secondary hover:bg-accent font-semibold w-1/2  bg-white p-2 px-4 rounded-full border border-accent mx-auto md:mx-0"
           >
-            <BiSolidFileImage className="text-2xl" />
+            <FaFilePdf className="text-2xl" />
             Save as PDF
             {/* do not remove this update in the future */}
             {/* {pageInfo && pageInfo.title && <PDFGenerator pageInfo={pageInfo} />} */}

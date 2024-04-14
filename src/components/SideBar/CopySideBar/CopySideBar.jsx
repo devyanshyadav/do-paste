@@ -183,7 +183,7 @@ function CopySideBar() {
               />
               <label
                 htmlFor="onceRead"
-                className="select-none  font-semibold cursor-pointer"
+                className="select-none text-nowrap  font-semibold cursor-pointer"
               >
                 Delete after read
               </label>
