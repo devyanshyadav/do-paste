@@ -7,7 +7,6 @@ import useStore from "../../../lib/ZustStore";
 import { toast } from "sonner";
 import { useLocalStorage } from "react-use";
 import { FaDownload } from "react-icons/fa";
-import html2canvas from "html2canvas";
 import { BsBoxArrowInUpRight } from "react-icons/bs";
 
 function CopySideBar() {
@@ -45,23 +44,15 @@ function CopySideBar() {
   };
 
   const downloadQR = () => {
-    const qrCode = document.getElementById("qr-code");
-    if (!qrCode) {
-      console.error("QR code element not found.");
-      return;
-    }
-
-    html2canvas(qrCode).then((canvas) => {
-      const pngUrl = canvas.toDataURL("image/png");
-
-      let downloadLink = document.createElement("a");
-      downloadLink.href = pngUrl;
-      downloadLink.download = "qr-code.png";
-
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-    });
+    const qrCodeURL = document.getElementById('qrCodeEl')
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+    let aEl = document.createElement("a");
+    aEl.href = qrCodeURL;
+    aEl.download = "QR_Code.png";
+    document.body.appendChild(aEl);
+    aEl.click();
+    document.body.removeChild(aEl);
   };
 
   const handleExpiryDurationChange = (e) => {
