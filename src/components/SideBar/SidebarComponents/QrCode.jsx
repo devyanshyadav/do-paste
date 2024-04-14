@@ -9,7 +9,6 @@ function QrCode() {
 
   return (
     <>
-      <div className="w-fit h-fit" id="qr-code">
       <QRCode
         id="qrCodeEl"
         value={`${process.env.VITE_APP_VIEW}${pageInfo.link}`}
@@ -19,7 +18,6 @@ function QrCode() {
         level={"L"}
         includeMargin={false}
       />
-      </div>
     </>
   );
 }

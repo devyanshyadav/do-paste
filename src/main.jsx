@@ -13,6 +13,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/edit" element={<App />} />
     </Routes>
     <Toaster position="bottom-right"/>
-
   </BrowserRouter>
 );
