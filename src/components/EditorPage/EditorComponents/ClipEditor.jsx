@@ -62,7 +62,9 @@ const ClipEditor = () => {
       document.execCommand(
         "insertHTML",
         false,
-        `<img style="border-radius:6px; margin:5px; height:200px;" src=${url} />‎ `
+        `<div style="display: flex; justify-content: center; width: 100%;">
+        <img style="border-radius: 6px; margin: 5px; aspect-ratio: 16/9;" src=${url} />
+      </div>‎ `
       );
     }
   };
