@@ -21,6 +21,7 @@ import ClipEmoji from "./ClipEmoji";
 import ClipTxtHighLight from "./ClipTxtHighLight";
 import ClipFontFamily from "./ClipFontFamily";
 import { IoImageOutline } from "react-icons/io5";
+import { PiVideo, PiVideoBold } from "react-icons/pi";
 
 const ClipEditor = () => {
   const [txtToggle, setTxtToggle] = useState(true);
@@ -56,7 +57,7 @@ const ClipEditor = () => {
   };
 
   const insertImage = () => {
-    const url = prompt("Enter the URL:");
+    const url = prompt("Enter the Image URL:");
     if (url) {
       document.execCommand("styleWithCSS", false, null);
       document.execCommand(
@@ -68,6 +69,24 @@ const ClipEditor = () => {
       );
     }
   };
+  const insertVideo = () => {
+    const url = prompt("Enter the Video URL:");
+    if (url) {
+      document.execCommand("styleWithCSS", false, null);
+      document.execCommand(
+        "insertHTML",
+        false,
+        `<div style="display: flex; justify-content: center; width: 100%;">
+        <video controls volume="0.5" style="border-radius: 6px; margin: 5px; aspect-ratio: 16/9;">
+  <source src=${url} type="video/mp4">
+  <source src=${url} type="video/ogg">
+  Your browser does not support HTML video.
+  </video>
+      </div>`
+      );
+    }
+  };
+
   const highlightText = (value) => {
     if (txtToggle) {
       document.execCommand("styleWithCSS", false, null);
@@ -260,6 +279,9 @@ const ClipEditor = () => {
       </button>
       <button onClick={insertImage} className={clipClass}>
         <IoImageOutline />
+      </button>
+      <button onClick={insertVideo} className={clipClass}>
+      <PiVideoBold />
       </button>
 
       <ClipEmoji emojiTxt={emojiTxt} clipClass={clipClass} />
