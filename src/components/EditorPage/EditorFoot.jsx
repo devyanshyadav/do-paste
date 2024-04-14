@@ -62,7 +62,7 @@ function EditorFoot({ setKeyWordStatus }) {
   }, []);
 
   return (
-    <div className="w-full max-h-20  self-center bg-primary border relative border-accent flex items-start justify-start flex-wrap gap-2 p-4 rounded-xl">
+    <div className="w-full max-h-20 overflow-y-scroll  self-center bg-primary border relative border-accent flex items-start justify-start flex-wrap gap-2 p-4 rounded-xl">
       <IoIosCloseCircle
         onClick={() => setKeyWordStatus(false)}
         className="text-xl absolute top-0 right-0 hover:text-accent cursor-pointer"

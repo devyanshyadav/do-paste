@@ -60,12 +60,12 @@ const EditorHead = () => {
           className="outline-none bg-transparent w-full"
         />
       </span>
-      <span className="place-self-end mx-1">
+      <span className="md:place-self-end">
         <button
           onClick={() => {
             setPublishStatus(true);
           }}
-          className="hover:text-accent border border-secondary hover:border-accent p-[5px] px-4 rounded-full bg-secondary text-primary flex items-center justify-center gap-1 "
+          className="hover:text-accent border border-secondary hover:border-accent p-[5px] px-4 rounded-full bg-secondary text-primary flex items-center justify-center gap-1 w-full "
         >
           Proceed <IoSend className="text-lg" />
         </button>

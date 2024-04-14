@@ -50,7 +50,6 @@ export default function ClipEmoji({ emojiTxt, clipClass }) {
         <div
           onClick={(e) => {
             e.stopPropagation();
-            (e) => console.log(e.detail);
           }}
           className="rounded-xl border border-accent overflow-hidden"
           ref={pickerRef}

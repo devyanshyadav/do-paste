@@ -25,7 +25,7 @@ function ShareLink() {
   const [shareData, setShareData] = React.useState(`${process.env.VITE_APP_VIEW}${pageInfo.link}`); // Set your share data here
   useEffect(() => {
     setShareData(`${process.env.VITE_APP_VIEW}${pageInfo.link}`);
-    console.log(shareData);
+    // console.log(shareData);
   }, [pageInfo]);
 
   const share = [

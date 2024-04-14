@@ -18,10 +18,10 @@ function ProfileLogo() {
   }
   useEffect(() => {
     getCurrentUser();
-    console.log("Initial State:", initialState);
-    console.log("User Status:", initialState.userStatus);
+    // console.log("Initial State:", initialState);
+    // console.log("User Status:", initialState.userStatus);
     if(initialState.userStatus){
-      console.log("Login Successfull")
+      // console.log("Login Successfull")
     }
   }, [ googleLogin, getCurrentUser, initialState.userStatus]);
   

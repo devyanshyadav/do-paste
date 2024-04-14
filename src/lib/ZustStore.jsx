@@ -57,9 +57,9 @@ const useStore = create((set, get) => ({
         process.env.VITE_APP_REDIRECT_GOOGLE_AUTH,
         process.env.VITE_APP_FAILURE_ON_GOOGLE_AUTH
       );
-      console.log("user", user);
+      // console.log("user", user);
       if (user) {
-        console.log("user in condition", user);
+        // console.log("user in condition", user);
         set({ userName: user.name, userId: user.$id, userStatus: true });
       }
     } catch (error) {
@@ -195,19 +195,19 @@ const useStore = create((set, get) => ({
     try {
       const currentDate = new Date();
       const formattedCurrentDate = currentDate.toISOString();
-      console.log("Current Date:", formattedCurrentDate);
+      // console.log("Current Date:", formattedCurrentDate);
 
       const res = await databases.listDocuments(databaseId, collectionId, [
         Query.lessThan("expiry", formattedCurrentDate),
       ]);
 
-      console.log("Documents to be deleted:", res.documents);
+      // console.log("Documents to be deleted:", res.documents);
 
       // also give permission to delete without authentication
       res.documents.forEach(async (doc) => {
         if (doc.expiry && doc.expiry !== "") {
           await databases.deleteDocument(databaseId, collectionId, doc.$id);
-          console.log("Deleted document:", doc.$id);
+          // console.log("Deleted document:", doc.$id);
         }
       });
     } catch (error) {
@@ -222,7 +222,7 @@ const useStore = create((set, get) => ({
         Query.equal("link", link),
       ]);
       set({ pageInfo: res.documents[0] });
-      console.log(res.documents[0]);
+      // console.log(res.documents[0]);
     } catch (err) {
       console.log(err.message);
     }
@@ -236,7 +236,7 @@ const useStore = create((set, get) => ({
           Query.equal("$id", editValue),
         ]);
         set({ pageInfo: res.documents[0] });
-        console.log("array", res.documents[0]);
+        // console.log("array", res.documents[0]);
       } catch (err) {
         console.log(err);
       }
@@ -292,7 +292,7 @@ const useStore = create((set, get) => ({
         }
       );
       usersAccess();
-      console.log(res);
+      // console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -302,7 +302,7 @@ const useStore = create((set, get) => ({
     const { databaseId, collectionId } = get().initialState;
     try {
       const res = await databases.deleteDocument(databaseId, collectionId, id);
-      console.log(res);
+      // console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -335,7 +335,7 @@ const useStore = create((set, get) => ({
 
   usersAccess: async () => {
     const { pageInfo, deletePage } = get();
-    console.log("hello", pageInfo.viewCount, pageInfo.usersCount);
+    // console.log("hello", pageInfo.viewCount, pageInfo.usersCount);
     if (pageInfo.onceRead && pageInfo.viewCount >= 1) {
       deletePage(pageInfo && pageInfo.$id);
       return toast.error("Maximum Page Limit reached");

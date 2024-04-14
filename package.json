@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "appwrite": "^13.0.1",
+    "clsx": "^2.1.0",
     "dotenv": "^16.4.5",
     "emoji-picker-element": "^1.21.3",
     "html2canvas": "^1.4.1",

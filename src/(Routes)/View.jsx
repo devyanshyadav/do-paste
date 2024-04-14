@@ -43,7 +43,7 @@ const View = () => {
         (item) => item === pageInfo.$id
       );
       if (res.length > 0) {
-        console.log("first", res);
+        // console.log("first", res);
         setEditStatus(true);
       }
     }
@@ -51,7 +51,7 @@ const View = () => {
   useEffect(() => {
     if (pageInfo) {
       totalPageViews();
-      console.log(pageInfo.visibility);
+      // console.log(pageInfo.visibility);
     }
   }, [pageInfo]);
 
@@ -117,7 +117,7 @@ const View = () => {
                 <IoMdShare className="hover:cursor-pointer hover:text-accent" />
               }
             >
-              <div className="bg-primary rounded-xl p-1 border border-accent">
+              <div className="bg-primary rounded-xl p-1 border border-accent shadow-md -translate-x-20 md:-translate-x-1/2">
                 <span className="text-sm text-secondary flex items-center gap-1 py-1 justify-center">
                   {process.env.VITE_APP_VIEW}${pageInfo.link}
                   <FaCopy
@@ -160,7 +160,7 @@ const View = () => {
                 <IoKey className="text-2xl" />
                 <p>Keywords</p>
               </span>
-              <div className="w-full p-1 flex gap-2 max-h-40 overflow-y-scroll">
+              <div className="w-full p-1 flex gap-1 max-h-40 overflow-y-scroll flex-wrap">
                 {pageInfo.keywords.map((keyword, i) => (
                   <span
                     key={i}

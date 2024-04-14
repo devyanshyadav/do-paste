@@ -49,9 +49,10 @@ const ClipEditor = () => {
       document.execCommand(
         "insertHTML",
         false,
-        `<code style="background-color:#E5E5E5;border-radius:4px; padding:1px 4px">${selectedTxtNode}</code>`
+        `<code style="background-color:#E5E5E5;border-radius:4px; padding:1px 4px">${selectedTxtNode}</code>‎ `
       );
     }
+    setSelectedTxtNode("");
   };
 
   const insertImage = () => {
@@ -61,7 +62,7 @@ const ClipEditor = () => {
       document.execCommand(
         "insertHTML",
         false,
-        `<img style="border-radius:6px; margin:5px; height:200px;" src=${url} />`
+        `<img style="border-radius:6px; margin:5px; height:200px;" src=${url} />‎ `
       );
     }
   };

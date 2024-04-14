@@ -79,12 +79,12 @@ function CopySideBar() {
     >
       <span
         onClick={() => setPublishStatus(false)}
-        className="absolute z-10 md:top-3 top-8  bg-primary right-1 hover:opacity-70  border-secondary border  rounded-full rounded-br-full cursor-pointer "
+        className="absolute z-10 md:top-3 top-12  bg-primary right-1 hover:opacity-70  border-secondary border  rounded-full rounded-br-full cursor-pointer "
       >
         <RiCloseFill className="text-2xl text-secondary" />
       </span>
 
-      <div className="w-full mt-16 md:mt-8 relative h-fit px-2  py-2 rounded-full border text-sm border-secondary   bg-white">
+      <div className="w-full mt-20 md:mt-8 relative h-fit px-2  py-2 rounded-full border text-sm border-secondary   bg-white">
         <input
           type="text"
           className="w-full  rounded-full outline-none pl-2  pr-10"
