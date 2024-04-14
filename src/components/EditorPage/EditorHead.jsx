@@ -57,10 +57,10 @@ const EditorHead = () => {
           placeholder="Enter Title"
           onChange={handleInput}
           defaultValue={pageInfo.title}
-          className="outline-none bg-transparent w-fit"
+          className="outline-none bg-transparent w-full"
         />
       </span>
-      <span className="place-self-end">
+      <span className="place-self-end mx-1">
         <button
           onClick={() => {
             setPublishStatus(true);
