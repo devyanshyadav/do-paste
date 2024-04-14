@@ -55,15 +55,21 @@ const View = () => {
     }
   }, [pageInfo]);
 
-  useEffect(() => {
-    if (pageInfo) {
-      if (likes) {
-        totalLikes();
-      } else {
-        totalDislikes();
-      }
+  const handleLike = () => {
+    if (!likes) {
+      setLikes(true);
+      setDislikes(false);
+      totalLikes(); // Update total likes
     }
-  }, [likes, dislikes]);
+  };
+  
+  const handleDislike = () => {
+    if (!dislikes) {
+      setLikes(false);
+      setDislikes(true);
+      totalDislikes(); // Update total dislikes
+    }
+  };
 
  
 
@@ -176,21 +182,19 @@ const View = () => {
             <div className="w-full flex divide-x-2  gap-4 rounded-full justify-around p-2 px-3 border border-accent">
               <div className="flex items-center gap-2">
                 <GrLike
-                  onClick={() => {
-                    setLikes(true);
-                    setDislikes(false);
-                  }}
-                  className="text-xl cursor-pointer transition-colors hover:text-green-500"
+                  onClick={handleLike}
+                  className={`text-xl hover:text-green-500 cursor-pointer ${
+                    likes ? "text-green-500" : "text-current"
+                  }`}
                 />
                 <span className="text-xl">{pageInfo.likes}</span>
               </div>
               <div className="flex items-center  gap-2 pl-2">
                 <GrDislike
-                  onClick={() => {
-                    setLikes(false);
-                    setDislikes(true);
-                  }}
-                  className="text-xl transition-colors cursor-pointer  hover:text-red-500"
+                  onClick={handleDislike}
+                  className={`text-xl hover:text-red-500 cursor-pointer ${
+                    dislikes ? "text-red-500" : "text-current"
+                  }`}
                 />
                 <span className="text-xl  ">{pageInfo.dislikes}</span>
               </div>
