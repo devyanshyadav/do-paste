@@ -73,12 +73,15 @@ const View = () => {
 
  
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(
-      `${process.env.VITE_APP_VIEW}${pageInfo.link}`
-    );
-    toast("Link Copied");
-  };
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(`${process.env.VITE_APP_VIEW}${pageInfo.link}`);
+      toast("Link Copied");
+    } catch (err) {
+      console.error("Failed to copy link: ", err);
+    }
+  }
+  
 
   const generatePDF = () => {
     const elementToPrint = document.getElementById('pageContent');
@@ -125,7 +128,7 @@ const View = () => {
             >
               <div className="bg-primary rounded-xl p-1 border border-accent shadow-md -translate-x-20 md:-translate-x-1/2">
                 <span className="text-sm text-secondary flex items-center gap-1 py-1 justify-center">
-                  {process.env.VITE_APP_VIEW}${pageInfo.link}
+                  {process.env.VITE_APP_VIEW}{pageInfo.link}
                   <FaCopy
                     onClick={handleCopy}
                     className="text-xl cursor-pointer hover:text-accent"

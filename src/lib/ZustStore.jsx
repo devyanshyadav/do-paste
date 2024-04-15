@@ -95,8 +95,14 @@ const useStore = create((set, get) => ({
 
   // This is the function to generate random url
   generateRandomUrl: async () => {
-    const { setPageInfo, pageInfo, setPageInfoToDB, setPublishStatus, getSameLink } = get();
-  
+    const {
+      setPageInfo,
+      pageInfo,
+      setPageInfoToDB,
+      setPublishStatus,
+      getSameLink,
+    } = get();
+
     if (!pageInfo.link) {
       let linkGen = Math.random().toString(36).substring(2, 7);
       while (await getSameLink(linkGen)) {
@@ -104,10 +110,10 @@ const useStore = create((set, get) => ({
       }
       setPageInfo("link", linkGen);
     }
-  
+
     setPublishStatus(true);
   },
-  
+
   getSameLink: async (link) => {
     const { collectionId, databaseId } = get().initialState;
 
@@ -121,7 +127,6 @@ const useStore = create((set, get) => ({
       return false;
     }
   },
-  
 
   // This is the function to set pageInfoToDB
   setPageInfoToDB: async (setLocalValue) => {
@@ -143,7 +148,10 @@ const useStore = create((set, get) => ({
     const { databaseId, collectionId, pageInfo } = get().initialState;
 
     try {
-      // Check if a document with the same link already exists
+      if (!title) {
+        toast.error("Title cannot be empty");
+        return;
+      }
       const res = await databases.listDocuments(databaseId, collectionId, [
         Query.equal("link", link),
       ]);
@@ -251,6 +259,10 @@ const useStore = create((set, get) => ({
       return toast.error("Unauthorized Access");
     }
     try {
+      if (!pageInfo.title) {
+        toast.error("Title cannot be empty");
+        return;
+      }
       const res = await databases.updateDocument(
         databaseId,
         collectionId,
