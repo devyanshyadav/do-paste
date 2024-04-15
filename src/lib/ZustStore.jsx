@@ -152,6 +152,12 @@ const useStore = create((set, get) => ({
         toast.error("Title cannot be empty");
         return;
       }
+      
+      if(!content){
+        toast.error("content cannot be empty");
+        return;
+      }
+      
       const res = await databases.listDocuments(databaseId, collectionId, [
         Query.equal("link", link),
       ]);
