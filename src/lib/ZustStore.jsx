@@ -157,6 +157,11 @@ const useStore = create((set, get) => ({
         toast.error("content cannot be empty");
         return;
       }
+
+      if (!author) {
+        toast.error("author name cannot be empty");
+        return;
+      }
       
       const res = await databases.listDocuments(databaseId, collectionId, [
         Query.equal("link", link),
@@ -217,7 +222,7 @@ const useStore = create((set, get) => ({
 
       // console.log("Documents to be deleted:", res.documents);
 
-      // also give permission to delete without authentication
+      
       res.documents.forEach(async (doc) => {
         if (doc.expiry && doc.expiry !== "") {
           await databases.deleteDocument(databaseId, collectionId, doc.$id);
@@ -267,6 +272,14 @@ const useStore = create((set, get) => ({
     try {
       if (!pageInfo.title) {
         toast.error("Title cannot be empty");
+        return;
+      }
+       if (!pageInfo.content) {
+        toast.error("content cannot be empty");
+        return;
+      }
+      if (!pageInfo.author) {
+        toast.error("author name cannot be empty");
         return;
       }
       const res = await databases.updateDocument(
