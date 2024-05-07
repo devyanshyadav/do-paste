@@ -25,7 +25,6 @@ function ShareLink() {
   const [shareData, setShareData] = React.useState(`${process.env.VITE_APP_VIEW}${pageInfo.link}`); // Set your share data here
   useEffect(() => {
     setShareData(`${process.env.VITE_APP_VIEW}${pageInfo.link}`);
-    // console.log(shareData);
   }, [pageInfo]);
 
   const share = [
@@ -84,7 +83,6 @@ function ShareLink() {
       {share.map((item, index) => (
         <span className="w-fit h-fil cursor-pointer hover:scale-105 " key={index}>{item.icon}</span>
       ))}
-     
     </div>
   );
 }

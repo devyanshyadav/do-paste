@@ -5,9 +5,6 @@ import { toast } from "sonner";
 
 const useStore = create((set, get) => ({
   initialState: {
-    userName: null,
-    userId: null,
-    userStatus: false,
     databaseId: process.env.VITE_APP_DATABASE_ID,
     collectionId: process.env.VITE_APP_COLLECTION_ID,
     projectId: process.env.VITE_APP_PROJECT_ID,
@@ -39,44 +36,6 @@ const useStore = create((set, get) => ({
   editLink: null,
   publishStatus: false,
 
-  getCurrentUser: async () => {
-    try {
-      const user = await account.get();
-      if (user) {
-        set({ userName: user.name, userId: user.$id, userStatus: user.status });
-      }
-    } catch (error) {
-      console.log("error on getting current user ", error);
-    }
-  },
-
-  googleLogin: async () => {
-    try {
-      const user = account.createOAuth2Session(
-        "google",
-        process.env.VITE_APP_REDIRECT_GOOGLE_AUTH,
-        process.env.VITE_APP_FAILURE_ON_GOOGLE_AUTH
-      );
-      // console.log("user", user);
-      if (user) {
-        // console.log("user in condition", user);
-        set({ userName: user.name, userId: user.$id, userStatus: true });
-      }
-    } catch (error) {
-      console.log("error on google login ", error);
-    }
-  },
-
-  logout: async () => {
-    try {
-      const user = await account.deleteSession("current");
-      if (user) {
-        set({ userName: null, userId: null, userStatus: false });
-      }
-    } catch (error) {
-      console.log("error on logout ", error);
-    }
-  },
 
   // This is the function to set pageInfo title and content
   setPageInfo: (name, data) => {

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SideBarWrapper from "../SidebarComponents/SideBarWrapper";
-import { RiCloseFill, RiFacebookCircleFill } from "react-icons/ri";
+import { RiCloseFill } from "react-icons/ri";
 import ShareLink from "../SidebarComponents/ShareLink";
 import QrCode from "../SidebarComponents/QrCode";
 import useStore from "../../../lib/ZustStore";
@@ -20,10 +20,6 @@ function CopySideBar() {
     setPageInfoToDB,
   } = useStore((state) => state);
   const [copyValue] = useState(pageInfo.link);
-  // const [close, setClose] = useState(false);
-  const [privateTo, setPrivateTo] = useState(false);
-  const [expiry, setExpiry] = useState("1");
-  const [numberAccess, setNumberAccess] = useState(1);
   const [localValue, setLocalValue] = useLocalStorage("dopasteEdit", []);
   const [settings, setSettings] = useState(false);
 
@@ -118,26 +114,6 @@ function CopySideBar() {
           </div>
         </div>
       </div>
-
-      {/* <hr className="border  border-accent w-full" />
-
-      <div className="flex gap-4 mt-2 items-center">
-        <input
-          type="checkbox"
-          name=""
-          id="private"
-          onChange={(e) =>
-            setPageInfo("visibility", e.target.checked ? true : false)
-          }
-          className="bg-secondary h-[18px] w-[18px] aspect-auto cursor-pointer"
-        />
-        <label
-          htmlFor="private"
-          className="select-none text-lg font-semibold cursor-pointer"
-        >
-          Private
-        </label>
-      </div> */}
       <span
         className="text-sm font-semibold hover:underline cursor-pointer "
         onClick={() => setSettings(!settings)}
@@ -217,7 +193,6 @@ function CopySideBar() {
           <BsBoxArrowInUpRight />
         </a>
       )}
-      {/* <hr className="border-[1.2px] border-solid border-accent w-full" /> */}
     </SideBarWrapper>
   );
 }
