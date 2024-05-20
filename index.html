@@ -2,9 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Do Paste</title>
+    <meta name="description" content="Do-Paste allows users to share single pages that are editable by the creator and can be shared with everyone. Simple React project with crazy features including an in-house text editor, expiry options, shareable links & QR codes, word count tracker, full-screen mode, and more.">
+    <meta name="keywords" content="Do-Paste, editable pages, React, Tailwind CSS, Zustand, Appwrite, text editor, expiry options, shareable links, QR codes, word count tracker, full-screen mode, PDF export">
+
+    <!-- Open Graph metadata -->
+    <meta property="og:title" content="Do-Paste" />
+    <meta property="og:description" content="Do-Paste allows users to share single pages that are editable by the creator and can be shared with everyone. Simple React project with crazy features including an in-house text editor, expiry options, shareable links & QR codes, word count tracker, full-screen mode, and more." />
+    <meta property="og:image" content="/vite.svg" />
+    <meta property="og:url" content="https://do-paste.vercel.app/" />
+
+    <!-- Twitter metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Do-Paste" />
+    <meta name="twitter:description" content="Do-Paste allows users to share single pages that are editable by the creator and can be shared with everyone. Simple React project with crazy features including an in-house text editor, expiry options, shareable links & QR codes, word count tracker, full-screen mode, and more." />
+    <meta name="twitter:image" content="/vite.svg" />
+
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N9MM1MWHCC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-N9MM1MWHCC');
+    </script>
+
+    <title>Do-Paste</title>
   </head>
   <body>
     <div class="pattern-grid h-screen w-screen text-secondary" id="root"></div>
