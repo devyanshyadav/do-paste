@@ -3,7 +3,6 @@
 ## Features
 
 - **Easy to Use**: Simple navigation for quick sharing.
-- **Login/Sign Up**: Secure account creation for personalized management.
 - **In-House Text Editor**: Format text, add images, and more with ease.
 - **Easy to Share**: Share via email, social media, or unique links.
 - **Manage Pages**: Organize and manage your snippets with ease.
@@ -19,9 +18,9 @@
 
 ## Files and Folder naming Convention
 
-- Folder and File names should be in CamelCase.
+- Folder and File names be in CamelCase.
 
-## Developers
+## Contributers
 
 - **Devyansh Yadav**
 - **Aasu Yadav**
